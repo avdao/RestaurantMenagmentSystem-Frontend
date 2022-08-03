@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>recipes</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['./product-add']">
+        <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<ion-list>
+  <ion-searchbar (ionChange)="searchTitle()" [(ngModel)]="title"></ion-searchbar>
+
+  <ion-item *ngFor="let e of ccc" [routerLink]="['./'+e.recipesId]">
+
+    <ion-avatar slot="start">
+      <ion-img  [src]="e.imageUrl" alt="loading...."></ion-img>
+    </ion-avatar>
+    <ion-label>{{e.title}}</ion-label>
+
+    <ion-label>{{e.recipesId}}</ion-label>
+
+  </ion-item>
+</ion-list>
+
+<app-category></app-category>
+</ion-content>

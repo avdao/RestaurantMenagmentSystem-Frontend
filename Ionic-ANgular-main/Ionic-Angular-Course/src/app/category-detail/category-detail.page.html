@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>Category Detail</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<ion-list>
+ 
+
+  <ion-item *ngFor="let e of cc" [href]="['http://localhost:8100/recipes/'+e.recipesId]">
+
+    <ion-avatar slot="start">
+      <ion-img  [src]="e.imageUrl" alt="loading...."></ion-img>
+    </ion-avatar>
+    <ion-label>{{e.title}}</ion-label>
+
+    <ion-label>{{e.recipesId}}</ion-label>
+
+  </ion-item>
+</ion-list>
+
+<app-category></app-category>
+</ion-content>
