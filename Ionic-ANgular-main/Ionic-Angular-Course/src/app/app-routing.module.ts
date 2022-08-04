@@ -17,10 +17,7 @@ const routes: Routes = [
 
 
       },
-      {
-        path: 'product-add',
-        loadChildren: () => import('./product-add/product-add.module').then( m => m.ProductAddPageModule)
-      },
+     
       {
         path:':recipeID',
         loadChildren: () => import('./recipes/recipe-detail/recipe-detail.module').then( m => m.RecipeDetailPageModule),
@@ -32,10 +29,29 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'edit/:id',
+  path: 'product-add',
+  children: [
+    {
+      path: '',
+      loadChildren: () => import('./product-add/product-add.module').then( m => m.ProductAddPageModule)
 
-    loadChildren: () => import('./edit-recipe/edit-recipe.module').then( m => m.EditRecipePageModule)
-  },
+
+    },
+    {
+      path: 'edit/:id',
+  
+      loadChildren: () => import('./product-add/product-add.module').then( m => m.ProductAddPageModule)
+    },
+    
+
+
+
+  ]
+ 
+},
+
+
+ 
   {
     path: 'category',
     loadChildren: () => import('./category/category.module').then( m => m.CategoryPageModule)

@@ -8,7 +8,7 @@ import { FormGroup,FormBuilder,FormControl } from '@angular/forms';
 import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-edit-recipe',
-  templateUrl: './edit-recipe.page.html',
+  templateUrl: './product-add.page.html',
   styleUrls: ['./edit-recipe.page.scss'],
 })
 export class EditRecipePage implements OnInit {
