@@ -64,11 +64,12 @@ console.log(this.ccc);
 
   getIng(id:number){
 
+    console.log('ovo',id)
     this.recipeService.getIng(id).subscribe(data=>{
       console.log(data);
       
       this.ccc23=data;
-      this.idSastojka=this.ccc23.idSastojka;
+      this.idSastojka=this.ccc23?.idSastojka;
       this.nameIngredients=this.ccc23.naziv
       this.kolicina=this.ccc23.kolicina
    
@@ -80,8 +81,10 @@ console.log(this.ccc);
     console.log(idSastojka)
     console.log(this.kolicina)
     const obj={
+      id:idSastojka,
       kolicina:parseInt(this.kolicina),
-      naziv:this.nameIngredients
+      naziv:this.nameIngredients,
+      RecipesId:this.id
     }
     console.log(obj)
     /*this.loadedRecipes3.kolicina=this.kolicina;
@@ -89,12 +92,26 @@ console.log(this.ccc);
   
     
 
-this.recipeService.editIng(idSastojka,obj).subscribe((obj12=>{
-this.isModalOpen=false;
-  //this.recipeService.getAllRecipes().subscribe(res => {});
-  this.router.navigate(['/recipes']);
-    console.log('OKE');
-  }));
+this.recipeService.editIng(idSastojka,obj).subscribe(obj=>{
+   this.isModalOpen=false;
+   this.recipeService.getRecipe(this.id).subscribe(data=>{
+    console.log(data);
+    this.loadedRecipes=data;
+    this.ccc=this.loadedRecipes.ingredients;
+    console.log(this.ccc);
+    /*
+        this.title=data.title;
+        this.imageUrl=data.imageUrl;
+        this.recipeId=data.recipeId;
+    
+    */
+      });
+   
+  console.log('OKE');
+}
+ 
+  );
+
 
   };
 
@@ -141,8 +158,18 @@ this.isModalOpen=false;
                 this.recipeService.deleteING(id).subscribe((obj12=>{
 
                   //this.recipeService.getAllRecipes().subscribe(res => {});
-                  this.router.navigate(['/recipes']);
-                    console.log('OKE');
+                  this.recipeService.getRecipe(this.id).subscribe(data=>{
+                    console.log(data);
+                    this.loadedRecipes=data;
+                    this.ccc=this.loadedRecipes.ingredients;
+                    console.log(this.ccc);
+                    /*
+                        this.title=data.title;
+                        this.imageUrl=data.imageUrl;
+                        this.recipeId=data.recipeId;
+                    
+                    */
+                      });
                   }));
               }
             }

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Namirnice</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="setOpen(true)">
+        <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<ion-list>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Modal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-dodaj-namirnice></app-dodaj-namirnice>
+      </ion-content>
+      
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-item *ngFor="let e of ccc">
+
+    
+    <ion-label>{{e.naziv}}</ion-label>
+
+    <ion-label>{{e.id}}</ion-label>
+
+  </ion-item>
+</ion-list>
+
+
+</ion-content>

@@ -59,7 +59,15 @@ const routes: Routes = [
   {
     path: 'category-detail/:id',
     loadChildren: () => import('./category-detail/category-detail.module').then( m => m.CategoryDetailPageModule)
-  }
+  },
+  {
+    path: 'mjerne-jedinice',
+    loadChildren: () => import('./mjerne-jedinice/mjerne-jedinice.module').then( m => m.MjerneJedinicePageModule)
+  },
+  {
+    path: 'namirnice',
+    loadChildren: () => import('./namirnice/namirnice.module').then( m => m.NamirnicePageModule)
+  },
 
 
 ];

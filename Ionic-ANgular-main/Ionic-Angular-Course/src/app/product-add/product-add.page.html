@@ -18,6 +18,10 @@
           <ion-label position="floating">Image url</ion-label>
           <ion-input [(ngModel)]="recipeImageUrl"></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-label position="floating">Price:</ion-label>
+          <ion-input [(ngModel)]="price"></ion-input>
+        </ion-item>
 
 
         <ion-button expand="block" (click)="setOpen(true)">Open</ion-button>
@@ -32,10 +36,20 @@
               </ion-toolbar>
             </ion-header>
             <ion-content class="ion-padding">
+              
               <ion-item>
-                <ion-label position="floating">Ime Sastojka</ion-label>
-                <ion-input [(ngModel)]="nameIngredients" ></ion-input>
+                <ion-select placeholder="Select category" [(ngModel)]="nameIngredients">
+                  <ion-select-option 
+                  *ngFor="let category of namirnice" 
+                   [value]="category.id">{{category?.naziv}}</ion-select-option>
+                </ion-select>
               </ion-item>
+
+
+
+
+
+
               <ion-item>
                 <ion-label position="floating">Kolicina:</ion-label>
                 <ion-input [(ngModel)]="kolicina"></ion-input>

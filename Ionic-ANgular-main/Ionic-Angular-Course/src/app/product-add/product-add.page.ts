@@ -23,12 +23,15 @@ obj123:any;
 isEditPage: boolean;
 pageTitle: string;
 loadedRecipe: any;
-
+name:string;
+sastojci2:any=[]
 idUrl:number;
       recipeTitle:string;
       recipeImageUrl:string;
       nameIngredients:string;
-      kolicina:string
+      kolicina:string;
+      price:string;
+      namirnice:any=[];
 
    
       category:number
@@ -48,21 +51,6 @@ idUrl:number;
     };
 
 
-    addSastojci(){
-    
-      this.obj={
-        kolicina:parseInt(this.kolicina),
-        naziv: this.nameIngredients
-         
-          
-          }
-      console.log(this.obj)
-this.sastojci.push(this.obj);
-
-
-this.isModalOpen=false;
-
-    }
     refreshList(){
 
 
@@ -75,11 +63,57 @@ this.isModalOpen=false;
   
    }
 
+   getAllNamirnice(){
+    this.recipeService.getAllNamirnice().subscribe(res => {
+      this.namirnice = res;
+      
+      console.log(this.namirnice);
+   })}
+   getNamirnice(id:number){
+    this.recipeService.getNamirnice(id).subscribe(res => {
+      this.name=res.naziv;
+      console.log(this.name)
 
-  
+      
+      
+   })}
+
+   
+   addSastojci(){
+
+    this.recipeService.getNamirnice(parseInt(this.nameIngredients)).subscribe(res => {
+      this.name=res.naziv;
+      console.log(this.name)
+
+      
+    
+
+    console.log(this.name)
+
+    this.obj={
+      kolicina:parseInt(this.kolicina),
+      naziv: this.name,
+      naziv3: this.nameIngredients
+    
+       
+        
+        }
+
+    console.log(this.obj)
+this.sastojci.push(this.obj);
+
+
+this.isModalOpen=false;
+
+  })
+
+
+}
 
   ngOnInit() {
 this.refreshList();
+this.getAllNamirnice();
+
 this.activatedRoute.paramMap.subscribe(paraMap => {
   if(!paraMap.has('recipeId'))
   {
@@ -100,6 +134,7 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
       this.recipeImageUrl= this.loadedRecipe?.imageUrl;
       this.category=this.loadedRecipes.kategorijaID,
       this.sastojci = this.loadedRecipe?.ingredients;
+      this.price=this.loadedRecipe?.price;
     });
   }
 });
@@ -123,7 +158,7 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
 
       this.recipeTitle = this.loadedRecipe?.title;
       this.recipeImageUrl = this.loadedRecipe?.imageUrl;
-  
+      this.price=this.loadedRecipe?.price;
       this.sastojci = this.loadedRecipe?.ingredients;
     });
   }
@@ -132,7 +167,16 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
 }
 
 
-  
+  priprema(){
+    for(let i=0;i<this.sastojci.length();i++){
+      const obj={
+        kolicina:this.sastojci.kolicina,
+        fkNaziv:this.sastojci.naziv3
+      }
+      console.log(obj)
+      this.sastojci2.push(obj)
+    }
+  }
 
  
   onSubmit(){
@@ -160,6 +204,7 @@ this.loadedRecipe.title=this.recipeTitle;
 this.loadedRecipe.imageUrl=this.recipeImageUrl;
 this.loadedRecipe.kategorijaID=this.category;
 this.loadedRecipe.ingrediats=this.sastojci;
+this.loadedRecipe.price=parseInt(this.price);
 
   this.recipeService.editRecipe(this.idUrl,this.loadedRecipe).subscribe(res2=>{
     this.router.navigate([`/recipes/`+this.idUrl]);
@@ -171,7 +216,8 @@ else {
     title:this.recipeTitle,
     imageUrl:this.recipeImageUrl,
     kategorijaId:this.category,
-    ingredients:this.sastojci
+    price:parseInt(this.price),
+    ingredients:this.sastojci2
     
     };
   this.recipeService.addProduct(obj).subscribe(res2=>{
