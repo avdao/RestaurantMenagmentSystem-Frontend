@@ -7,6 +7,7 @@ import { RecipesService} from '../recipes/recipes.service'
 import { ActivatedRoute ,Router} from '@angular/router';
 import { HostListener } from '@angular/core';
 import { delay, map,  tap } from 'rxjs/operators';
+import { MjerneJedinice } from '../recipes/mjerneJedinice.model';
 @Component({
   selector: 'app-mjerne-jedinice',
   templateUrl: './mjerne-jedinice.page.html',
@@ -14,7 +15,7 @@ import { delay, map,  tap } from 'rxjs/operators';
 })
 export class MjerneJedinicePage implements OnInit {
   
-    public ccc: any[];
+    public ccc: MjerneJedinice[];
     isModalOpen = false;
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;

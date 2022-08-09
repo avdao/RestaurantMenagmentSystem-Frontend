@@ -22,7 +22,7 @@ zadnji:number;
 obj123:any;
 isEditPage: boolean;
 pageTitle: string;
-loadedRecipe: any;
+loadedRecipe: Recipe;
 name:string;
 sastojci2:any=[]
 idUrl:number;
@@ -32,6 +32,8 @@ idUrl:number;
       kolicina:string;
       price:string;
       namirnice:any=[];
+      recipeForSent:Recipe;
+
 
    
       category:number
@@ -78,6 +80,18 @@ idUrl:number;
       
    })}
 
+   getZadnji(){
+    let l;
+    this.recipeService.getAllRecipes().subscribe(res => {
+      l=res.length
+      console.log(l-1)
+console.log("GET ZADNJI",res[l-1].recipesId)
+this.zadnji=res[l-1].recipesId+1;
+console.log(this.zadnji)
+
+    })
+   
+   }
    
    addSastojci(){
 
@@ -113,6 +127,7 @@ this.isModalOpen=false;
   ngOnInit() {
 this.refreshList();
 this.getAllNamirnice();
+this.getZadnji();
 
 this.activatedRoute.paramMap.subscribe(paraMap => {
   if(!paraMap.has('recipeId'))
@@ -134,7 +149,7 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
       this.recipeImageUrl= this.loadedRecipe?.imageUrl;
       this.category=this.loadedRecipes.kategorijaID,
       this.sastojci = this.loadedRecipe?.ingredients;
-      this.price=this.loadedRecipe?.price;
+      this.price=String(this.loadedRecipe?.price);
     });
   }
 });
@@ -158,7 +173,7 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
 
       this.recipeTitle = this.loadedRecipe?.title;
       this.recipeImageUrl = this.loadedRecipe?.imageUrl;
-      this.price=this.loadedRecipe?.price;
+      this.price=String(this.loadedRecipe?.price);
       this.sastojci = this.loadedRecipe?.ingredients;
     });
   }
@@ -168,14 +183,26 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
 
 
   priprema(){
-    for(let i=0;i<this.sastojci.length();i++){
+    const a=[]
+
+   
+
+      
+    console.log("OVAJ ZADNJI GLEDAJ",this.zadnji)
+    for(let i=0;i<this.sastojci.length;i++){
       const obj={
-        kolicina:this.sastojci.kolicina,
-        fkNaziv:this.sastojci.naziv3
+        kolicina:this.sastojci[i].kolicina,
+        
+        fkNaziv:this.sastojci[i].naziv3
       }
       console.log(obj)
       this.sastojci2.push(obj)
     }
+    
+    
+    
+
+
   }
 
  
@@ -199,29 +226,41 @@ console.log('Oke')
 if(this.isEditPage){
   console.log(this.idUrl)
 
- 
+  this.priprema()
 this.loadedRecipe.title=this.recipeTitle;
 this.loadedRecipe.imageUrl=this.recipeImageUrl;
 this.loadedRecipe.kategorijaID=this.category;
-this.loadedRecipe.ingrediats=this.sastojci;
+this.loadedRecipe.ingredients=this.sastojci;
 this.loadedRecipe.price=parseInt(this.price);
 
+
   this.recipeService.editRecipe(this.idUrl,this.loadedRecipe).subscribe(res2=>{
+    this.sastojci2=[]
     this.router.navigate([`/recipes/`+this.idUrl]);
+   
+
   });
+
 }
 else {
-  const obj={
-
-    title:this.recipeTitle,
-    imageUrl:this.recipeImageUrl,
-    kategorijaId:this.category,
-    price:parseInt(this.price),
-    ingredients:this.sastojci2
+  
+this.priprema()
+this.recipeForSent={
+  RecipesID:0,
+  title:this.recipeTitle,
+  imageUrl: this.recipeImageUrl,
+  kategorijaID: this.category,
+  price: parseInt(this.price),
+  ingredients: this.sastojci2
+}
+console.log(this.recipeForSent)
     
-    };
-  this.recipeService.addProduct(obj).subscribe(res2=>{
+    
+  
+
+  this.recipeService.addProduct(this.recipeForSent).subscribe(res2=>{
     this.router.navigate([`/recipes/`]);
+    this.sastojci2=[]
   });
 }
   }

@@ -7,13 +7,14 @@ import { RecipesService} from '../recipes/recipes.service'
 import { ActivatedRoute ,Router} from '@angular/router';
 import { HostListener } from '@angular/core';
 import { delay, map,  tap } from 'rxjs/operators';
+import { Namirnice } from '../recipes/Namirnice.Model';
 @Component({
   selector: 'app-namirnice',
   templateUrl: './namirnice.page.html',
   styleUrls: ['./namirnice.page.scss'],
 })
 export class NamirnicePage implements OnInit {
-  public ccc: any[];
+  public ccc: Namirnice[];
   isModalOpen = false;
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;

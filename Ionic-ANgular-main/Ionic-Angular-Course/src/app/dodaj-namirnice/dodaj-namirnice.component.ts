@@ -7,6 +7,7 @@ import { ActivatedRoute ,Router} from '@angular/router';
 import { HostListener } from '@angular/core';
 import { delay, map,  tap } from 'rxjs/operators';
 import { NamirnicePage } from '../namirnice/namirnice.page';
+import { Namirnice } from '../recipes/Namirnice.Model';
 @Component({
   selector: 'app-dodaj-namirnice',
   templateUrl: './dodaj-namirnice.component.html',
@@ -16,6 +17,7 @@ export class DodajNamirniceComponent implements OnInit {
 ccc:any=[]
 nazivSastojka:''
 category:number
+obj:Namirnice
 
   constructor(private recipeService: RecipesService, private namirnice: NamirnicePage,private activatedRoute: ActivatedRoute,private router: Router) { }
 
@@ -36,13 +38,13 @@ category:number
   }
 
   onSubmit(){
-    const obj={
-
+    this.obj={
+      id:0,
       naziv:this.nazivSastojka,
       mjernaJedinica:this.category,
       
       };
-    this.recipeService.addSastojak(obj).subscribe(res2=>{
+    this.recipeService.addSastojak(this.obj).subscribe(res2=>{
       this.namirnice.isModalOpen=false
       this.namirnice.refreshList()
     });

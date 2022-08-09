@@ -64,6 +64,12 @@ deleteING(recipeID: number){
  
  
  }
+ deleteSastojak(recipeID: number){
+  return this.http.delete(this.namirniceApi + recipeID);
+ //this.recipes=this.recipes.filter(reci=> reci.RecipeID !==recipeID);
+ 
+ 
+ }
 
 addProduct(data: any): Observable <any> {
    
@@ -93,10 +99,14 @@ editRecipe(id: number,data: any): Observable <any>{
   console.log('Na servicu',id);
 
   return this.http.put(this.api+id,data);
-/*this.recipes.find(reci=> reci.RecipeID ===id).RecipeID=id;
-this.recipes.find(reci=> reci.RecipeID ===id).title=title;
-this.recipes.find(reci=> reci.RecipeID ===id).imageUrl=imageU;
-this.recipes.find(reci=> reci.RecipeID===id).ingredients=ing;*/
+
+};
+
+editSastojka(id: number,data: any): Observable <any>{
+  console.log('Na servicu',id);
+
+  return this.http.put(this.ingApi+id,data);
+
 };
 
 

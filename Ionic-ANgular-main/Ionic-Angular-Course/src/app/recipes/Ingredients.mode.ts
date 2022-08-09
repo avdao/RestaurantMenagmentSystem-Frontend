@@ -1,7 +1,8 @@
 export interface ingredients {
-    
+    id:number;
     kolicina: number;
-    naziv: string;
+    recipesId:number
+    fkNaziv: number;
    
   
   }

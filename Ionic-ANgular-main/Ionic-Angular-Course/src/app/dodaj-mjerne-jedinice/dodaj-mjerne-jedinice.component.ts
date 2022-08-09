@@ -9,6 +9,7 @@ import { HostListener } from '@angular/core';
 import { delay, map,  tap } from 'rxjs/operators';
 import { NamirnicePage } from '../namirnice/namirnice.page';
 import { MjerneJedinicePage } from '../mjerne-jedinice/mjerne-jedinice.page';
+import { MjerneJedinice } from '../recipes/mjerneJedinice.model';
 @Component({
   selector: 'app-dodaj-mjerne-jedinice',
   templateUrl: './dodaj-mjerne-jedinice.component.html',
@@ -17,7 +18,8 @@ import { MjerneJedinicePage } from '../mjerne-jedinice/mjerne-jedinice.page';
 export class DodajMjerneJediniceComponent implements OnInit {
   ccc:any=[]
   nazivMjerneJedinice:''
-  category:number
+  nazivMjerneJediniceLong:''
+  obj:MjerneJedinice;
   constructor(private recipeService: RecipesService, private namirnice: MjerneJedinicePage,private activatedRoute: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {}
@@ -26,13 +28,14 @@ export class DodajMjerneJediniceComponent implements OnInit {
 
 
   onSubmit(){
-    const obj={
-
+    this.obj={
+      id:0,
       jedinica:this.nazivMjerneJedinice,
-      jedinicaLong:this.category,
+      jedinicaLong:this.nazivMjerneJediniceLong,
       
       };
-    this.recipeService.addMjernaJedinica(obj).subscribe(res2=>{
+      console.log(this.obj)
+    this.recipeService.addMjernaJedinica(this.obj).subscribe(res2=>{
       this.namirnice.isModalOpen=false
       this.namirnice.refreshList()
     });

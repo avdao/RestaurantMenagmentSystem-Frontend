@@ -17,7 +17,7 @@ export class RecipesPage {
 public recipe: any;
 public allRecipes: Recipe[];
 
-  public ccc: any[];
+  public ccc: Recipe[];
   public recipesByTitle:any[];
 
 title: '';
