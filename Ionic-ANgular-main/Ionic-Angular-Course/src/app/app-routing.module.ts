@@ -74,7 +74,7 @@ const routes: Routes = [
   },
   {
     path: 'add-in-storage',
-    loadChildren: () => import('./add-in-storage/add-in-storage.module').then( m => m.AddInStoragePageModule)
+    loadChildren: () => import('./storageEntry/add-in-storage.module').then( m => m.AddInStoragePageModule)
   },
 
 
