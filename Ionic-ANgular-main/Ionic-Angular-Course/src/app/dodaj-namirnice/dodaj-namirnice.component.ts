@@ -17,6 +17,7 @@ export class DodajNamirniceComponent implements OnInit {
 ccc:any=[]
 nazivSastojka:''
 category:number
+minKolicina:number
 obj:Namirnice
 
   constructor(private recipeService: RecipesService, private namirnice: NamirnicePage,private activatedRoute: ActivatedRoute,private router: Router) { }
@@ -42,9 +43,12 @@ obj:Namirnice
       id:0,
       naziv:this.nazivSastojka,
       mjernaJedinica:this.category,
+      minKolicina:this.minKolicina
+    
       
       };
-    this.recipeService.addSastojak(this.obj).subscribe(res2=>{
+      console.log(this.minKolicina)
+    this.recipeService.addSastojak(this.obj,this.minKolicina).subscribe(res2=>{
       this.namirnice.isModalOpen=false
       this.namirnice.refreshList()
     });

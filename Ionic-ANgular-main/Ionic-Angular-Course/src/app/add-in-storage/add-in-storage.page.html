@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AddInStorage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-select placeholder="Select category" [(ngModel)]="nameIngredients">
+      <ion-select-option 
+      *ngFor="let category of ccc" 
+       [value]="category.id">{{category?.naziv}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Kolicina:</ion-label>
+    <ion-input [(ngModel)]="kolicina"></ion-input>
+  </ion-item>
+  <ion-col >
+
+                
+
+
+
+    <ion-button expand="block" (click)="onSubmit()" >Submit</ion-button>
+  </ion-col>
+
+</ion-content>

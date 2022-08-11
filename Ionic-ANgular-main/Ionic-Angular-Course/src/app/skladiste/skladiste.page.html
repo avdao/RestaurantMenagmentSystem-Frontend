@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Skladiste</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/product-add']">
+        <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/mjerne-jedinice']">
+      <ion-icon name="scale-outline"></ion-icon>
+  </ion-button>
+
+
+<ion-button [routerLink]="['/namirnice']">
+  <ion-icon name="restaurant-outline"></ion-icon>
+</ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<ion-list>
+ 
+
+  <ion-item *ngFor="let e of ccc">
+<ion-label [ngStyle]="{'background-color': e.ispodMin? 'lightblue' : 'red','color': e.ispodMin? 'black' : 'white'}">{{e.kolicina}}</ion-label>
+
+
+ 
+    <ion-label  [ngStyle]="{'background-color': e.ispodMin? 'lightblue' : 'red','color': e.ispodMin? 'black' : 'white'}">{{e.naziv}}</ion-label>
+
+   
+
+  </ion-item>
+</ion-list>
+
+
+</ion-content>

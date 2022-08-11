@@ -18,6 +18,7 @@ export class RecipeDetailPage implements OnInit {
   loadedRecipes: Recipe;
   ccc:any;
   ccc23:any;
+  ccc12:any;
   nameIngredients:string;
   kolicina:string;
   nn: string;
@@ -31,13 +32,27 @@ export class RecipeDetailPage implements OnInit {
   uzmi:any=[];
   idPokusaj: number;
   iddd:number;
-  idN:number
+  zaPushMj:any=[];
+  idN:number;
+  mjerneJedinice:any=[];
   editObj:ingredients;
   setOpen(isOpen: boolean,id: number) {
     this.isModalOpen = isOpen;
     this.idN=id
     this.getIng(id)
     
+  }
+
+  refreshList2(){
+
+
+    this.recipeService.getAllMjerneJedinice().subscribe(res => {
+      this.ccc12 = res;
+      
+      console.log(this.ccc12);
+    });
+  
+  
   }
 
   getAllN(){
@@ -55,6 +70,7 @@ export class RecipeDetailPage implements OnInit {
 
   ngOnInit(): void {
     this.getAllN()
+    this.refreshList2()
  
     console.log('ovoooo' ,this.iddd)
 
@@ -76,7 +92,7 @@ console.log(data);
 this.loadedRecipes=data;
 this.ccc=this.loadedRecipes.ingredients;
 this.getNamirnice();
-console.log('ovoo gledass');
+console.log('ovoo gledass',this.ccc);
 
 /*
     this.title=data.title;
@@ -112,9 +128,38 @@ console.log('ovoo gledass');
 
   }
 
+getMj(){
+console.log(this.ccc,'uouw[hjfvgoeuij')
+console.log(this.namirnice,'cc12uouw[hjfvgoeuij')
+  for(let i=0;i<this.ccc.length;i++){
+    for(let j=0;j<this.namirnice.length;j++){
+      console.log(this.ccc[i].fkNaziv,'ooooooooo',this.namirnice[j].id)
+      if(this.ccc[i].fkNaziv==this.namirnice[j].id){
+        this.mjerneJedinice.push(this.namirnice[j].mjernaJedinica)
+        console.log("Mjerne Jedince",this.mjerneJedinice)
+
+  }
+}
+
+for(let i=0;i<this.mjerneJedinice.length;i++){
+  for(let j=0;j<this.ccc12.length;j++){
+    if(this.ccc12[j].id==this.mjerneJedinice[i]){
+      this.zaPushMj.push(this.ccc12[j].jedinica)
+      console.log(this.zaPushMj)
+    }
+  }
+}
+
+
+}
+}
+
 getNamirnice(){
  console.log(this.ccc.length)
  let obj: any;
+ this.getMj()
+
+
 
 for(let i=0;i<this.ccc.length;i++){
   for(let j=0;j<this.namirnice.length;j++){
@@ -123,7 +168,8 @@ for(let i=0;i<this.ccc.length;i++){
       id:this.ccc[i].id,
       fk:this.ccc[i].fkNaziv,
       naziv:this.namirnice[j].naziv,
-      kolicina:this.ccc[i].kolicina
+      kolicina:this.ccc[i].kolicina,
+      mjerneJedinice:this.zaPushMj[i]
 
     }
     this.uzmi.push(obj)

@@ -4,6 +4,7 @@ export interface Recipe {
   imageUrl: string;
   kategorijaID:number,
   price:number,
+  descriptions:string,
   ingredients: any[];
 
 }

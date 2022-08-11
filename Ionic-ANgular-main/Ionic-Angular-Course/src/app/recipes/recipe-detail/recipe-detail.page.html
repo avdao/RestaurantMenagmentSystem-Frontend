@@ -30,8 +30,10 @@
     </ion-row>
     <ion-row>
       <ion-col><h1>{{loadedRecipes?.title}}</h1></ion-col>
+  
     </ion-row>
     <ion-row>
+      <ion-label>{{loadedRecipes?.descriptions}}</ion-label>
       <ion-col><h1>Ingredients:{{loadedRecipes?.ingrediats}}</h1></ion-col>
     </ion-row>
 
@@ -72,8 +74,10 @@
         </ion-modal>
       <ion-label >{{e.id}}</ion-label>
       <ion-label>{{e.naziv}}</ion-label>
+      
   
       <ion-label>{{e.kolicina}}</ion-label>
+      <ion-label>{{e.mjerneJedinice}}</ion-label>
   
     </ion-item>
   </ion-grid>

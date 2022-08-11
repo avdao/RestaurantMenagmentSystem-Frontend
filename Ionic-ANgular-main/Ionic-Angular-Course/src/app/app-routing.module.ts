@@ -68,6 +68,14 @@ const routes: Routes = [
     path: 'namirnice',
     loadChildren: () => import('./namirnice/namirnice.module').then( m => m.NamirnicePageModule)
   },
+  {
+    path: 'skladiste',
+    loadChildren: () => import('./skladiste/skladiste.module').then( m => m.SkladistePageModule)
+  },
+  {
+    path: 'add-in-storage',
+    loadChildren: () => import('./add-in-storage/add-in-storage.module').then( m => m.AddInStoragePageModule)
+  },
 
 
 ];

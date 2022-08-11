@@ -3,6 +3,7 @@ import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors
 import { Recipe } from './recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { DodajNamirniceComponent } from '../dodaj-namirnice/dodaj-namirnice.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +14,17 @@ private readonly categoryApi='https://localhost:44346/api/Category/';
 private readonly ingApi='https://localhost:44346/api/Ingredients/';
 private readonly mjApi='https://localhost:44346/api/MjerneJedinice/';
 private readonly namirniceApi='https://localhost:44346/api/Namirnice/';
+private readonly skladisteApi='https://localhost:44346/api/Skladiste/';
+private readonly skladisteUlazApi='https://localhost:44346/api/SkladisteUlaz/';
+data2:any;
   constructor(private http: HttpClient) { }
 
   getAllRecipes(): Observable < any> {
     return this.http.get<any>(this.api);
+  }
+
+  getAllSkladiste(): Observable < any> {
+    return this.http.get<any>(this.skladisteApi);
   }
   getAllMjerneJedinice(): Observable < any> {
     return this.http.get<any>(this.mjApi);
@@ -77,9 +85,13 @@ addProduct(data: any): Observable <any> {
  /* this.recipes.push(data);*/
 
 }
-addSastojak(data: any): Observable <any> {
-   
-  return this.http.post(this.namirniceApi, data);
+addSastojak(data: any,minKolicina:number): Observable <any> {
+
+  this.data2={
+    data,
+    minKolicina
+  };
+  return this.http.post(this.namirniceApi, this.data2);
  /* this.recipes.push(data);*/
 
 }
@@ -89,6 +101,14 @@ addMjernaJedinica(data: any): Observable <any> {
  /* this.recipes.push(data);*/
 
 }
+
+addSkladisteUlaz(data: any): Observable <any> {
+   
+  return this.http.post(this.skladisteUlazApi, data);
+ /* this.recipes.push(data);*/
+
+}
+
 
 addING(data:any): Observable <any> {
   return this.http.post(this.ingApi, data);

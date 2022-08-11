@@ -29,6 +29,7 @@ idUrl:number;
       recipeTitle:string;
       recipeImageUrl:string;
       nameIngredients:string;
+      descriptions:string;
       kolicina:string;
       price:string;
       namirnice:any=[];
@@ -112,12 +113,19 @@ console.log(this.zadnji)
        
         
         }
+        if(this.obj.kolicina<0){
+          alert(
+        "Kolicina manje od nule"
+          )
+        }else{
+          console.log(this.obj)
+          this.sastojci.push(this.obj);
+          
+          
+          this.isModalOpen=false;
+        }
 
-    console.log(this.obj)
-this.sastojci.push(this.obj);
 
-
-this.isModalOpen=false;
 
   })
 
@@ -230,7 +238,7 @@ if(this.isEditPage){
 this.loadedRecipe.title=this.recipeTitle;
 this.loadedRecipe.imageUrl=this.recipeImageUrl;
 this.loadedRecipe.kategorijaID=this.category;
-this.loadedRecipe.ingredients=this.sastojci;
+this.loadedRecipe.ingredients=this.sastojci2;
 this.loadedRecipe.price=parseInt(this.price);
 
 
@@ -250,6 +258,7 @@ this.recipeForSent={
   title:this.recipeTitle,
   imageUrl: this.recipeImageUrl,
   kategorijaID: this.category,
+  descriptions:this.descriptions,
   price: parseInt(this.price),
   ingredients: this.sastojci2
 }
