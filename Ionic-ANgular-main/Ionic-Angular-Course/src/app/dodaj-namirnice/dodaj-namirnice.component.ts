@@ -28,7 +28,6 @@ obj:Namirnice
 
   refreshList(){
 
-
     this.recipeService.getAllMjerneJedinice().subscribe(res => {
       this.ccc = res;
       
