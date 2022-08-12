@@ -17,6 +17,10 @@
     <ion-label position="floating">Kolicina:</ion-label>
     <ion-input [(ngModel)]="kolicina"></ion-input>
   </ion-item>
+  <ion-item >
+    <ion-label position="floating">Ispravka:</ion-label>
+    <ion-checkbox slot="start"  [(ngModel)]="entry"  (change)="checkValue(entry)"></ion-checkbox>
+  </ion-item>
   <ion-col >
 
                 

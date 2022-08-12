@@ -11,6 +11,7 @@ import { Namirnice } from '../recipes/Namirnice.Model';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { DatePipe } from '@angular/common';
 import { IonDatetime } from '@ionic/angular';
+import { ComponentFixtureNoNgZone } from '@angular/core/testing';
 
 
 
@@ -24,6 +25,7 @@ ccc:any[]
 kolicina:number;
 nameIngredients:number;
 recipesForSent:any;
+entry:boolean=false;
   constructor(private recipeService: RecipesService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
 
@@ -38,7 +40,9 @@ recipesForSent:any;
 
 
  }
-
+ checkValue(changeFalse: true){
+  this.entry=changeFalse;
+}
 
  onSubmit(){
 
@@ -53,23 +57,32 @@ current.setSeconds(0)
 current.setMilliseconds(0)
 
 const timestamp = new Timestamp('short',0)
+
+
+
   this.recipesForSent={
     
     fkNamirncie:this.nameIngredients,
    kolicina:(Number)(this.kolicina),
+   ispravkaKrivogUnosa:this.entry
+
    
    
    
   }
+
+ 
+
   console.log(this.recipesForSent)
       
       
     
+    
   
-    this.recipeService.addSkladisteUlaz(this.recipesForSent).subscribe(res2=>{
-      this.router.navigate([`/recipes/`]);
+     this.recipeService.addSkladisteUlaz(this.recipesForSent).subscribe(res2=>{
+       this.router.navigate([`/recipes/`]);
 
-    });
+     });
  }
   ngOnInit() {
     this.refreshList()

@@ -182,7 +182,10 @@ this.activatedRoute.paramMap.subscribe(paraMap => {
       this.recipeTitle = this.loadedRecipe?.title;
       this.recipeImageUrl = this.loadedRecipe?.imageUrl;
       this.price=String(this.loadedRecipe?.price);
-      this.sastojci = this.loadedRecipe?.ingredients;
+      //this.sastojci = this.loadedRecipe?.ingredients;
+
+
+      console.log("loaded recipe",this.loadedRecipe)
     });
   }
 });
@@ -241,7 +244,7 @@ this.loadedRecipe.kategorijaID=this.category;
 this.loadedRecipe.ingredients=this.sastojci2;
 this.loadedRecipe.price=parseInt(this.price);
 
-
+console.log(this.loadedRecipe)
   this.recipeService.editRecipe(this.idUrl,this.loadedRecipe).subscribe(res2=>{
     this.sastojci2=[]
     this.router.navigate([`/recipes/`+this.idUrl]);
